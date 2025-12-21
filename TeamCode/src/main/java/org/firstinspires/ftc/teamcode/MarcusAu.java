@@ -9,12 +9,15 @@ import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @Autonomous
 public class MarcusAu extends LinearOpMode{
 
+    private DcMotor FrM, BM;
     private Follower follower;
     private Timer pathTimer, opmodeTimer;
 
@@ -122,12 +125,25 @@ public class MarcusAu extends LinearOpMode{
         pathTimer.resetTimer();
     }
 
+    public void inititk(HardwareMap hardwareMap){
+        FrM = hardwareMap.get(DcMotor.class, "FrM");
+        BM = hardwareMap.get(DcMotor.class, "BM");
+        FrM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    public void itkon(){
+        FrM.setPower(0.75);
+        BM.setPower(0.75);
+    }
+
     @Override
     public void runOpMode(){
 
             while(!isStopRequested()&&opModeIsActive())
             {
                 waitForStart();
+                inititk(hardwareMap);
                 rowcounter = 1;
                 pathState = PathState.DRIVE_BALLPOS1GET;
                 pathTimer = new Timer();
@@ -139,6 +155,7 @@ public class MarcusAu extends LinearOpMode{
                 follower.setPose(startpose);
                 while(!isStopRequested()&&opModeIsActive())
                 {
+                    itkon();
                   follower.update();
                   statePathUpdate();
                   telemetry.addData("Path Time", pathTimer.getElapsedTimeSeconds());
