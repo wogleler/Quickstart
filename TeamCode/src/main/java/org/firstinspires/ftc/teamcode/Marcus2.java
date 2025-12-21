@@ -19,7 +19,6 @@ public class Marcus2 extends LinearOpMode{
             {
                 move.Movement(gamepad1);
                 Itk.take(gamepad1);
-                Itk.climb(gamepad1);
             }
         }
     }

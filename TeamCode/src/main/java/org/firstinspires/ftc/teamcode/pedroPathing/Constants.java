@@ -30,8 +30,8 @@ public class Constants {
             .rightRearMotorName("br")
             .leftRearMotorName("bl")
             .leftFrontMotorName("fl")
-            .robotWidth(16)
-            .robotLength(16)
+            .robotWidth(8.8)
+            .robotLength(13.2)
             .leftFrontEncoderDirection(Encoder.FORWARD)
             .leftRearEncoderDirection(Encoder.FORWARD)
             .rightFrontEncoderDirection(Encoder.FORWARD)
@@ -45,4 +45,6 @@ public class Constants {
                 .driveEncoderLocalizer(localizerConstants)
                 .build();
     }
+
+
 }
