@@ -5,13 +5,15 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Intake {
-    DcMotor IM;
+    DcMotor FrM, BM;
     public void Init(HardwareMap hardwareMap){
-        IM = hardwareMap.get(DcMotor.class, "IM");
+        FrM = hardwareMap.get(DcMotor.class, "FrM");
+        BM = hardwareMap.get(DcMotor.class, "BM");
     }
     public void take(Gamepad gamepad1){
         if (gamepad1.xWasPressed()){
-            IM.setPower(0.75);
+            FrM.setPower(0.75);
+            BM.setPower(0.75);
         }
     }
 }
