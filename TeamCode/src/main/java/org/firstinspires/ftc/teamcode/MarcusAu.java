@@ -98,14 +98,17 @@ public class MarcusAu extends LinearOpMode{
                 follower.followPath(driveShootPos1, true);
                 setPathState(PathState.SHOOT_PRELOAD);
                 rowcounter = 2;
+                break;
             case DRIVE_SHOOTPOS2:
                 follower.followPath(driveShootPos2, true);
                 setPathState(PathState.SHOOT_PRELOAD);
                 rowcounter = 3;
+                break;
             case DRIVE_SHOOTPOS3:
                 follower.followPath(driveShootPos3, true);
                 setPathState(PathState.SHOOT_PRELOAD);
                 rowcounter = 0;
+                break;
             case SHOOT_PRELOAD:
                 //shooting stuff goes here
                 if(!follower.isBusy()){
