@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @Autonomous
@@ -20,7 +21,7 @@ public class MarcusAu extends LinearOpMode{
     private DcMotor FrM, BM;
     private Follower follower;
     private Timer pathTimer, opmodeTimer;
-
+    Outtake Out = new Outtake();
     public enum PathState{
         //Startpos - End Pos
 
@@ -44,6 +45,7 @@ public class MarcusAu extends LinearOpMode{
     private final Pose GetThirdBall2 = new Pose(18.790035587188612,83.35943060498221,Math.toRadians(180));
     private final Pose ShootPose = new Pose(57.56583629893238,85.75088967971531,Math.toRadians(45));
     int rowcounter = 1;
+    int shoottimer = 0;
     private PathChain driveStartPosGetFirstBall,driveShootPos1,driveShootPosGetSecondBall,driveShootPos2,driveShootPosGetThirdBall,driveShootPos3;
 
 
@@ -111,13 +113,21 @@ public class MarcusAu extends LinearOpMode{
                 break;
             case SHOOT_PRELOAD:
                 //shooting stuff goes here
-                if(!follower.isBusy()){
-
-                }
-                if(rowcounter == 2){
-                    setPathState(PathState.DRIVE_BALLPOS2GET);
-                } else if (rowcounter == 3) {
-                    setPathState(PathState.DRIVE_BALLPOS3GET);
+                if(!follower.isBusy()) {
+                    if (shoottimer < 30) {
+                        shoottimer += 1;
+                        Out.AngleHood(0.5f, telemetry);
+                        Out.setrotation(0.5f, telemetry);
+                        Out.FireBall(telemetry);
+                    } else {
+                        Out.StopNextBall(telemetry);
+                        shoottimer = 0;
+                        if(rowcounter == 2){
+                            setPathState(PathState.DRIVE_BALLPOS2GET);
+                        } else if (rowcounter == 3) {
+                            setPathState(PathState.DRIVE_BALLPOS3GET);
+                        }
+                    }
                 }
                 break;
         }
@@ -143,9 +153,7 @@ public class MarcusAu extends LinearOpMode{
     @Override
     public void runOpMode(){
 
-            while(!isStopRequested()&&opModeIsActive())
-            {
-                waitForStart();
+
                 inititk(hardwareMap);
                 rowcounter = 1;
                 pathState = PathState.DRIVE_BALLPOS1GET;
@@ -156,6 +164,7 @@ public class MarcusAu extends LinearOpMode{
 
                 buildPaths();
                 follower.setPose(startpose);
+                waitForStart();
                 while(!isStopRequested()&&opModeIsActive())
                 {
                     itkon();
@@ -166,4 +175,3 @@ public class MarcusAu extends LinearOpMode{
                 }
             }
     }
-}

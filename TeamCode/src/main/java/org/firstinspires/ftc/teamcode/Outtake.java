@@ -60,4 +60,34 @@ public class Outtake {
             telemetry.update();
         }
     }
+    // autonomous part here
+    public void setrotation(float RotationPos,Telemetry telemetry){
+
+        rotate.setPosition(RotationPos);
+
+
+        telemetry.addData("Rotate pos - ", rotate.getPosition());
+        telemetry.update();
+    }
+    public void AngleHood(float HoodPosition,Telemetry telemetry){
+        hood.setPosition(HoodPosition);
+        telemetry.addData("Hood pos - ", hood.getPosition());
+        telemetry.update();
+    }
+    public void FireBall(Telemetry telemetry){
+
+        power.setPower(1);
+        help.setPosition(0);
+        telemetry.addData("Fire - ", 1);
+        telemetry.addData("Help - ", 0);
+        telemetry.update();
+
+    }
+    public void StopNextBall(Telemetry telemetry){
+
+        help.setPosition(0.5);
+        telemetry.addData("Fire - ", 0);
+        telemetry.addData("Help - ", 0.5);
+        telemetry.update();
+    }
 }
