@@ -22,7 +22,7 @@ public class Outtake {
         help.setDirection(Servo.Direction.REVERSE);
         rotate.setPosition(0);
         hood.setPosition(0);
-        help.setPosition(90);
+        help.setPosition(0);
     }
     public void rotation(Gamepad gamepad1, Telemetry telemetry){
         if (gamepad1.right_trigger!=0){
@@ -47,14 +47,14 @@ public class Outtake {
     public void fireinthehole(Gamepad gamepad1, Telemetry telemetry){
         if (gamepad1.touchpadWasPressed()){
             power.setPower(1);
-            help.setPosition(0);
+            help.setPosition(0.3);
             telemetry.addData("Fire - ", 1);
             telemetry.addData("Help - ", 0);
             telemetry.update();
         }
         if (gamepad1.touchpadWasReleased()){
             power.setPower(0);
-            help.setPosition(90);
+            help.setPosition(0);
             telemetry.addData("Fire - ", 0);
             telemetry.addData("Help - ", 90);
             telemetry.update();
