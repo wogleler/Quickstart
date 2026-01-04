@@ -14,17 +14,14 @@ public class Marcus2 extends LinearOpMode{
         move.Init(hardwareMap);
         Itk.Init(hardwareMap);
         Out.Init(hardwareMap);
+        waitForStart();
         while(!isStopRequested()&&opModeIsActive())
         {
-            waitForStart();
-            while(!isStopRequested()&&opModeIsActive())
-            {
-                move.Movement(gamepad1);
-                Itk.take(gamepad1);
-                Out.rotation(gamepad1, telemetry);
-                Out.DaHood(gamepad1, telemetry);
-                Out.fireinthehole(gamepad1, telemetry);
-            }
+            move.Movement(gamepad1);
+            Itk.take(gamepad1);
+            Out.rotation(gamepad1, telemetry);
+            Out.DaHood(gamepad1, telemetry);
+            Out.fireinthehole(gamepad1, telemetry);
         }
     }
 }
