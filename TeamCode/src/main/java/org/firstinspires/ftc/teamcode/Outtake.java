@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import android.service.chooser.ChooserTarget;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -36,9 +35,9 @@ public class Outtake {
 
     public void DaHood(Gamepad gamepad1, Telemetry telemetry){
         if (gamepad1.dpadDownWasPressed())
-            hp+=0.1;
+            hp+=10;
         if (gamepad1.dpadDownWasPressed())
-            hp-=0.1;
+            hp-=10;
         hood.setPosition(hp);
         telemetry.addData("Hood pos - ", hood.getPosition());
         telemetry.update();
