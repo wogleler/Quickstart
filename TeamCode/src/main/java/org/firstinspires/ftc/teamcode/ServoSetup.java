@@ -23,8 +23,8 @@ public class ServoSetup extends LinearOpMode {
     public void test(Gamepad gamepad1, Telemetry telemetry){
         if (gamepad1.dpadUpWasPressed())
             push.setPosition(push.getPosition()+0.1);
-        if (gamepad1.dpadUpWasPressed())
-            push.setPosition(push.getPosition()+0.1);
+        if (gamepad1.dpadDownWasPressed())
+            push.setPosition(push.getPosition()-0.1);
         if (gamepad1.dpadRightWasPressed())
             rotate.setPosition(rotate.getPosition()+0.1);
         if (gamepad1.dpadLeftWasPressed())
@@ -32,7 +32,7 @@ public class ServoSetup extends LinearOpMode {
         if (gamepad1.xWasPressed())
             hood.setPosition(hood.getPosition()+0.1);
         if (gamepad1.circleWasPressed())
-            hood.setPosition(hood.getPosition()-1.0);
+            hood.setPosition(hood.getPosition()-0.1);
         telemetry.addData("Push - ", push.getPosition());
         telemetry.addData("Rotate - ", rotate.getPosition());
         telemetry.addData("Hood - ", hood.getPosition());
