@@ -26,6 +26,7 @@ public class Marcus2 extends LinearOpMode{
             Out.rotation(gamepad1, telemetry);
             Out.DaHood(gamepad1, telemetry);
             Out.fireinthehole(gamepad1, telemetry);
+            telemetry.update();
         }
     }
 }
