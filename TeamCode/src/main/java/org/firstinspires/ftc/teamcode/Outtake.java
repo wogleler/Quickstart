@@ -14,13 +14,14 @@ public class Outtake {
     Servo hood, help;
     CRServo rotate;
     double hp=0.0;
+    int nigga = 0;
     public void Init(HardwareMap hardwareMap){
         power = hardwareMap.get(DcMotor.class, "power");
         rotate = hardwareMap.get(CRServo.class, "rotate");
         hood = hardwareMap.get(Servo.class, "hood");
         help = hardwareMap.get(Servo.class, "help");
         power.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        help.setDirection(Servo.Direction.REVERSE);
+        help.setDirection(Servo.Direction.FORWARD);
         rotate.setPower(0);
         hood.setPosition(0);
         help.setPosition(0);
@@ -35,7 +36,7 @@ public class Outtake {
     }
 
     public void DaHood(Gamepad gamepad1, Telemetry telemetry){
-        if (gamepad1.dpadDownWasPressed()&&hp<=0.5)
+        if (gamepad1.dpadUpWasPressed()&&hp<=0.5)
             hp+=0.1;
         if (gamepad1.dpadDownWasPressed())
             hp-=0.1;
@@ -44,18 +45,44 @@ public class Outtake {
     }
 
     public void fireinthehole(Gamepad gamepad1, Telemetry telemetry){
-        if (gamepad1.touchpadWasPressed()){
+        /*if (gamepad1.touchpadWasPressed()){
+
             power.setPower(1);
-            help.setPosition(0.5);
+            nigga++;
+
+
             telemetry.addData("Fire - ", 1);
+
+        }
+        if(nigga>0){
+            nigga++;
+            telemetry.addData("Nigga - ", nigga);
+        }
+        if(nigga==120){
+            nigga = 0;
+            help.setPosition(0.5);
             telemetry.addData("Help - ", 0.5);
         }
         if (gamepad1.touchpadWasReleased()){
             power.setPower(0);
             help.setPosition(0);
+            nigga = 0;
             telemetry.addData("Fire - ", 0);
             telemetry.addData("Help - ", 0);
+        }*/
+        if (gamepad1.leftBumperWasPressed())
+            power.setPower(1);
+        if (gamepad1.triangleWasPressed())
+        {
+            help.setPosition(0.5);
         }
+        if (gamepad1.circleWasPressed())
+        {
+            help.setPosition(0.0);
+        }
+        if (gamepad1.rightBumperWasPressed())
+            power.setPower(0);
+
     }
     // autonomous part here
     public void setrotation(float RotationPos,Telemetry telemetry){
