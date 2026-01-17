@@ -27,7 +27,9 @@ public class Outtake {
         help.setPosition(0);
     }
     public void rotation(Gamepad gamepad1, Telemetry telemetry){
-        if (gamepad1.right_trigger!=0){
+        if (gamepad1.left_trigger!=0 && gamepad1.right_trigger!=0) {
+            rotate.setPower(0.0);
+        }else if (gamepad1.right_trigger!=0){
             rotate.setPower(gamepad1.right_trigger);
         } else if (gamepad1.left_trigger!=0) {
             rotate.setPower(-gamepad1.left_trigger);
@@ -84,7 +86,7 @@ public class Outtake {
             power.setPower(0);
 
     }
-    // autonomous part here
+    /*
     public void setrotation(float RotationPos,Telemetry telemetry){
 
         rotate.setPower(RotationPos);
@@ -114,4 +116,5 @@ public class Outtake {
         telemetry.addData("Help - ", 0.5);
         telemetry.update();
     }
+     */
 }
